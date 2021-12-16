@@ -76,6 +76,9 @@ val uniform_support : values:'a array -> 'a t
 
 (** {1 Continuous distributions} *)
 
+val beta : a:float -> b:float -> float t
+(** {{: https://en.wikipedia.org/wiki/Beta_distribution}Beta distribution} with parameters [a] and [b]. *)
+
 val gaussian : mu:float -> sigma:float -> float t
 (** {{: https://en.wikipedia.org/wiki/Normal_distribution}Gaussian distribution} with mean [mu] and standard deviation [sigma]. *)
 

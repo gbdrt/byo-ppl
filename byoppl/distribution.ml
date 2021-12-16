@@ -130,6 +130,14 @@ let split_array dist =
   let d = split_list (support ~values ~logits) in
   Array.of_list d
 
+let beta ~a ~b =
+  assert (a > 0. && b > 0.);
+  let sample () = Owl_stats.beta_rvs ~a ~b in
+  let logpdf x = Owl_stats.beta_logpdf x ~a ~b in
+  let mean () = a /. (a +. b) in
+  let var () = a *. b /. (((a +. b) ** 2.) *. (a +. b +. 1.)) in
+  make ~sample ~logpdf ~mean ~var ()
+
 let gaussian ~mu ~sigma =
   assert (sigma > 0.);
   let sample () = Owl_stats.gaussian_rvs ~mu ~sigma in
