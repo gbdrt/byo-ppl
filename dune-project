@@ -1,0 +1,15 @@
+(lang dune 2.9)
+(name byo-ppl)
+(authors "MPRI 2021-2022")
+(maintainers "Guillaume Baudart (guillaume.baudart@inria.fr)")
+(homepage https://github.com/gbdrt/byo-ppl)
+(bug_reports https://github.com/gbdrt/byo-ppl/issues)
+(generate_opam_files true)
+(package
+ (name byo-ppl)
+ (synopsis "Build Your Own Probabilistic Programming Language")
+ (depends
+  (dune (>= 2.9))
+  (owl (>= 1.0))
+ )
+)
