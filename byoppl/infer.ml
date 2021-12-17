@@ -46,7 +46,7 @@ module Importance_sampling = struct
     prob.particles.(prob.id) <- { particle with value = Some v };
     run_next prob
 
-  let infer ?(n = 100) model data =
+  let infer ?(n = 1000) model data =
     let init_particle = { value = None; score = 0.; k = (model data) exit } in
     let prob = { id = -1; particles = Array.make n init_particle } in
     let prob = run_next prob in
