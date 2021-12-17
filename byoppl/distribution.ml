@@ -108,7 +108,11 @@ let uniform_support ~values =
 
 let split dist =
   let { values; logits; _ } = get_support dist in
-  let v1, v2 = Array.split values in
+  let v1, v2 =
+    values |> Array.to_list |> List.split |> fun (x, y) ->
+    (Array.of_list x, Array.of_list y)
+  in
+  (* let v1, v2 = Array.split values in *)
   (support ~values:v1 ~logits, support ~values:v2 ~logits)
 
 let split_list dist =
