@@ -55,4 +55,25 @@ module Importance_sampling = struct
     Distribution.support ~values ~logits
 end
 
-module Particle_filter = struct end
+module Particle_filter = struct
+  include Importance_sampling
+
+  let resample particles =
+    let logits = Array.map (fun x -> x.score) particles in
+    let values = Array.map (fun x -> { x with score = 0. }) particles in
+    let dist = Distribution.support ~values ~logits in
+    Array.init (Array.length particles) (fun _ -> Distribution.draw dist)
+
+  let factor s k prob =
+    let particle = prob.particles.(prob.id) in
+    prob.particles.(prob.id) <-
+      { particle with k = k (); score = s +. particle.score };
+    let prob =
+      if prob.id < Array.length prob.particles - 1 then prob
+      else { id = -1; particles = resample prob.particles }
+    in
+    run_next prob
+
+  let assume p = factor (if p then 0. else -.infinity)
+  let observe d x = factor (Distribution.logpdf d x)
+end
