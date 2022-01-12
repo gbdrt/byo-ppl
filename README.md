@@ -1,5 +1,7 @@
 # Build Your Own Probabilistic Programming Language
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/gbdrt/byo-ppl/HEAD)
+
 ## Install
 
 After cloning the repo, the easiest way to install all the dependencies is via opam:
