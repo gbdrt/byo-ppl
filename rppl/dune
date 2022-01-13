@@ -1,0 +1,20 @@
+(env (dev (flags (:standard -warn-error -A -w -a))))
+
+(rule
+ (deps (:zli rppl.zli ))
+ (targets rppl.zci)
+ (action (run zeluc %{zli})))
+
+(rule
+ (targets hmm.ml hmm_main.ml)
+ (deps (:zl hmm.zls) rppl.zci)
+ (action (bash "zeluc -copy -s main -o hmm_main %{zl}")))
+
+(rule
+ (targets coin.ml coin_main.ml)
+ (deps (:zl coin.zls) rppl.zci)
+ (action (bash "zeluc -copy -s main -o coin_main %{zl}")))
+
+(executables
+  (names hmm_main coin_main)
+  (libraries zelus byoppl))

@@ -1,0 +1,16 @@
+type 'a distribution
+type prob
+
+val gaussian : float -> float -> float distribution
+val bernoulli : float -> int distribution
+val uniform : float -> float -> float distribution
+
+val draw : 'a distribution -> 'a
+val mean : float distribution -> float
+
+val sample : prob * 'a distribution -AD-> 'a
+val factor : prob * float -AD-> unit
+val observe : prob * 'a distribution * 'a -AD-> unit
+
+val infer_importance : int -S-> ((prob * 'a) -D-> 'b) -S-> 'a -D-> 'b distribution
+val infer_pf : int -S-> ((prob * 'a) -D-> 'b) -S-> 'a -D-> 'b distribution

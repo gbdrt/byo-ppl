@@ -1,0 +1,8 @@
+open Rppl
+
+let node coin (prob, x) = 0. (* TODO *)
+
+let node main () = () where
+  rec obs = draw (bernoulli 0.3)
+  and d = infer_importance 1000 coin obs
+  and () = print_int obs; print_string " "; print_float (mean d); print_newline ()
