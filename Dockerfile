@@ -43,4 +43,4 @@ RUN opam exec -- ocaml-jupyter-opam-genspec && \
 
 RUN echo ". ${HOME}/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true" >> ${HOME}/.bashrc
 
-COPY . ${HOME}
+COPY --chown=${NB_UID} . ${HOME}
